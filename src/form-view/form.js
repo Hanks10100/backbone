@@ -9,6 +9,7 @@ const FormView = Backbone.View.extend({
         enctype: 'multipart/form-data',
     },
     events: {
+        'submit': 'submit',
         'focus [role="form-editor"]': 'handleFocus',
     },
     schema: [],
@@ -100,6 +101,22 @@ const FormView = Backbone.View.extend({
         _.each(this.fields, field => field.showValidateTips(show));
         return this;
     },
+
+    // 提交表单数据
+    submit(callback, onerror) {
+        if (this.validate()) {
+            // TODO: 返回原生的 FormData 对象
+            const formData = this.getValue();
+            this.onSubmit(formData);
+            this.trigger('submit', formData);
+        } else {
+            this.showValidateTips();
+        }
+        return this;
+    },
+
+    // 真正的提交表单数据，应该由子类视图实现
+    onSubmit(formData) {},
 
 });
 
