@@ -1,4 +1,5 @@
 // var Backbone = require('backbone');
+const utils = require('./utils');
 const { createEditor } = require('./editors');
 
 const FieldView = Backbone.View.extend({
@@ -15,14 +16,14 @@ const FieldView = Backbone.View.extend({
             .attr('for', name)
             .attr('role', 'field-label')
             .html(options.label)
-            // .addClass(getColumnClass({col: '4,3'}))
+            .addClass(utils.getColumnClass({col: '4,3'}))
 
         this.editor = createEditor.apply(this, arguments);
         this.$editor = this.editor.$el;
 
         this.$output = $('<output class="field-output"></output>')
             .attr('role', 'field-output').hide();
-        var $wrapper = $('<div></div>');//.addClass(getColumnClass({col: '8,9'}));
+        var $wrapper = $('<div></div>').addClass(utils.getColumnClass({col: '8,9'}));
 
         this.$el.attr('data-field', name);
         this.$el.append(this.$label, $wrapper.append(this.editor.$el, this.$output));

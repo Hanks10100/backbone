@@ -1,4 +1,5 @@
 // var Backbone = require('backbone');
+const utils = require('./utils');
 const FieldView = require('./field');
 
 const FormView = Backbone.View.extend({
@@ -32,7 +33,7 @@ const FormView = Backbone.View.extend({
             return $('<fieldset class="row"></fieldset>')
                 .attr('data-row', index + 1)
                 .append(_.map(fieldset, function(schema, key) {
-                    var $wrapper = $('<div></div>');//.addClass(getColumnClass(schema));
+                    var $wrapper = $('<div></div>').addClass(utils.getColumnClass(schema));
                     const field = self.createField(key, schema);
                     return $wrapper.append(field.el);
                 }));
