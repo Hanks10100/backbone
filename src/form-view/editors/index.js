@@ -1,3 +1,4 @@
+const FishEditor = require('./fish');
 const { CheckboxEditor, RadioEditor } = require('./checks');
 const { InputEditor, TextareaEditor } = require('./input');
 const { SelectEditor } = require('./select');
@@ -16,11 +17,10 @@ function createEditor(options = {}, configs = {}) {
     const { catagory, type } = parseType(options);
     var Editor = InputEditor;
     switch (catagory) {
+        case 'fish': Editor = FishEditor; break;
+
         case 'XTag':
             if (window.XTag) Editor = XTag.getComponent('x', catagory);
-        break;
-
-        case 'fish':
         break;
 
         default: switch (type) {
