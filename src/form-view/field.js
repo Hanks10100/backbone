@@ -38,16 +38,29 @@ const FieldView = Backbone.View.extend({
     },
 
     // 使表单元素转为普通的输出元素
-    freeze: function() {
+    freeze() {
         this.$editor.hide();
         this.$output.html(this.editor.getOutputValue()).show();
         return this;
     },
 
     // 使表单的静态输出转为可编辑元素
-    unfreeze: function() {
+    unfreeze() {
         this.$editor.show();
         this.$output.empty().hide();
+        return this;
+    },
+
+    validate(showTips) {
+        const isValidate = this.editor.reportValidity();
+        if (!isValidate) {
+            this.showValidateTips(showTips !== false);
+        }
+        return isValidate;
+    },
+
+    // TODO: 可以显示或关闭校验提示信息
+    showValidateTips(show) {
         return this;
     },
 });

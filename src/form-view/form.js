@@ -79,14 +79,25 @@ const FormView = Backbone.View.extend({
     },
 
     // 使表单元素转为普通的输出元素
-    freeze: function() {
+    freeze() {
         _.each(this.fields, field => field.freeze());
         return this;
     },
 
     // 使表单的静态输出转为可编辑元素
-    unfreeze: function() {
+    unfreeze() {
         _.each(this.fields, field => field.unfreeze());
+        return this;
+    },
+
+    // 校验表单数据
+    validate(showTips) {
+        return _.every(this.fields, field => field.validate(showTips));
+    },
+
+    // 可以显示或关闭校验提示信息
+    showValidateTips(show) {
+        _.each(this.fields, field => field.showValidateTips(show));
         return this;
     },
 
