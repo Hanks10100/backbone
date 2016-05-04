@@ -100,12 +100,14 @@ const FormView = Backbone.View.extend({
 
     // 使表单元素转为普通的输出元素
     freeze() {
+        this.$form.addClass('freeze');
         _.each(this.fields, field => field.freeze());
         return this;
     },
 
     // 使表单的静态输出转为可编辑元素
     unfreeze() {
+        this.$form.removeClass('freeze');
         _.each(this.fields, field => field.unfreeze());
         return this;
     },

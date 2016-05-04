@@ -39,6 +39,7 @@ const FieldView = Backbone.View.extend({
 
     // 使表单元素转为普通的输出元素
     freeze() {
+        this.$el.addClass('freeze');
         this.$editor.hide();
         this.$output.html(this.editor.getOutputValue()).show();
         return this;
@@ -46,6 +47,7 @@ const FieldView = Backbone.View.extend({
 
     // 使表单的静态输出转为可编辑元素
     unfreeze() {
+        this.$el.removeClass('freeze');
         this.$editor.show();
         this.$output.empty().hide();
         return this;
