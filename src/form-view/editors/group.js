@@ -29,6 +29,14 @@ const GroupEditor = BaseEditor.extend({
             .data('editor-value', options.value)
             .data('editor-label', options.label);
     },
+
+    // 获取已经选中的编辑项
+    _getValueArray: function() {
+        return _.chain(this.fields)
+            .filter($input => $input.is(':checked'))
+            .map($input => $input.data('editor-value'))
+            .value()
+    },
 });
 
 module.exports = GroupEditor;
