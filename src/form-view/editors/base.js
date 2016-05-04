@@ -11,7 +11,7 @@ const BaseEditor = Backbone.View.extend({
     },
 
     // 获取用于显示的表单值字符串
-    getOutputValue: function() {
+    getOutputValue() {
         return String(this.getValue());
     },
 

@@ -31,7 +31,7 @@ const GroupEditor = BaseEditor.extend({
     },
 
     // 获取已经选中的编辑项
-    _getValueArray: function() {
+    _getValueArray() {
         return _.chain(this.fields)
             .filter($input => $input.is(':checked'))
             .map($input => $input.data('editor-value'))
@@ -39,7 +39,7 @@ const GroupEditor = BaseEditor.extend({
     },
 
     // 获取选中编辑项的文字
-    getOutputValue: function() {
+    getOutputValue() {
         return _.chain(this.fields)
             .filter($input => $input.is(':checked'))
             .map($input => '<span>' + $input.data('editor-label') + '</span>')
