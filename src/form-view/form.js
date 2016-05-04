@@ -28,22 +28,22 @@ const FormView = Backbone.View.extend({
 
     // 添加表单的内容
     _initFieldElement() {
-        var self = this;
-        this.$el.append(_.map(this.schema, function(fieldset, index) {
-            return $('<fieldset class="row"></fieldset>')
+        this.$el.append(_.map(this.schema, (fieldset, index) =>
+            $('<fieldset class="row"></fieldset>')
                 .attr('data-row', index + 1)
-                .append(_.map(fieldset, function(schema, key) {
-                    var $wrapper = $('<div></div>').addClass(utils.getColumnClass(schema));
-                    const field = self.createField(key, schema);
-                    return $wrapper.append(field.el);
-                }));
-        }));
+                .append(_.map(fieldset, (schema, key) =>
+                    $('<div></div>')
+                        .addClass(utils.getColumnClass(schema))
+                        .append(this.createField(key, schema).el)
+                ))
+        ));
     },
 
-    createField: function(key, schema) {
-        this.fields = this.fields || {};
+    createField(key, schema) {
+        const options = _.extend({ name: key }, schema);
+        const field = new FieldView(options);
 
-        var field = new FieldView(_.extend({ name: key }, schema));
+        this.fields = this.fields || {};
         this.fields[key] = field;
 
         return field;

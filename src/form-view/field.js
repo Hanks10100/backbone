@@ -2,6 +2,8 @@
 const utils = require('./utils');
 const { createEditor } = require('./editors');
 
+const fieldOptions = ['name', 'type'];
+
 const FieldView = Backbone.View.extend({
     className: 'form-group',
     attributes: {
@@ -9,24 +11,30 @@ const FieldView = Backbone.View.extend({
     },
 
     // TODO: 添加更详细的表单项的 DOM 结构
-    initialize: function(options, configs) {
-        var name = options.name;
-        this.type = options.type;
-        this.$label = $('<label class="control-label"></label>')
-            .attr('for', name)
-            .attr('role', 'field-label')
-            .html(options.label)
-            .addClass(utils.getColumnClass({col: '4,3'}))
+    initialize(options, configs) {
+        const { name, type, label } = options;
+        _.extend(this, _.pick(options, fieldOptions));
 
-        this.editor = createEditor.apply(this, arguments);
+        this.$label = $('<label class="control-label"></label>')
+            .attr({
+                'for': name,
+                'role': 'field-label',
+            })
+            .addClass(utils.getColumnClass({col: '4,3'}))
+            .html(label)
+
+        this.editor = createEditor(options, configs);
         this.$editor = this.editor.$el;
 
         this.$output = $('<output class="field-output"></output>')
-            .attr('role', 'field-output').hide();
-        var $wrapper = $('<div></div>').addClass(utils.getColumnClass({col: '8,9'}));
+            .attr('role', 'field-output')
+            .hide();
 
-        this.$el.attr('data-field', name);
-        this.$el.append(this.$label, $wrapper.append(this.editor.$el, this.$output));
+        const $wrapper = $('<div></div>')
+            .addClass(utils.getColumnClass({col: '8,9'}))
+            .append(this.$editor, this.$output);
+
+        this.$el.attr('data-field', name).append(this.$label, $wrapper);
     },
 });
 
