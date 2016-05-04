@@ -36,6 +36,20 @@ const FieldView = Backbone.View.extend({
 
         this.$el.attr('data-field', name).append(this.$label, $wrapper);
     },
+
+    // 使表单元素转为普通的输出元素
+    freeze: function() {
+        this.$editor.hide();
+        this.$output.html(this.editor.getOutputValue()).show();
+        return this;
+    },
+
+    // 使表单的静态输出转为可编辑元素
+    unfreeze: function() {
+        this.$editor.show();
+        this.$output.empty().hide();
+        return this;
+    },
 });
 
 module.exports = FieldView;

@@ -78,6 +78,18 @@ const FormView = Backbone.View.extend({
         return this;
     },
 
+    // 使表单元素转为普通的输出元素
+    freeze: function() {
+        _.each(this.fields, field => field.freeze());
+        return this;
+    },
+
+    // 使表单的静态输出转为可编辑元素
+    unfreeze: function() {
+        _.each(this.fields, field => field.unfreeze());
+        return this;
+    },
+
 });
 
 module.exports = FormView;
