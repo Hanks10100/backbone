@@ -7,7 +7,8 @@ const InputEditor = BaseEditor.extend({
 
     initialize(options, configs) {
         _.extend(this, _.pick(options, fieldOptions));
-        this.$el.attr(_.pick(options, ['type', 'placeholder']));
+        this.$el.attr('id', options.name);
+        this.$el.attr(_.pick(options, ['name', 'type', 'placeholder']));
         return this;
     },
 

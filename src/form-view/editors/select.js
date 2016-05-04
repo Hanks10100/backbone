@@ -3,6 +3,10 @@ const BaseEditor = require('./base');
 const SelectEditor = BaseEditor.extend({
     tagName: 'select',
     initialize(options = {}, configs = {}) {
+        this.$el.attr({
+            id: options.name,
+            name: options.name,
+        });
         this.options = _.result(options, 'options');
         _.each(this.options, (opt, index) => {
             this.$el.append(
