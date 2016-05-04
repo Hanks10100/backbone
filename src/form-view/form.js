@@ -16,7 +16,7 @@ const FormView = Backbone.View.extend({
         this.el = this.$el[0];
         this.$form = this._createFormElement();
         this.$el.html(this.$form);
-        this.delegateEvents(formEvents);
+        this.events = _.extend({}, this.events, formEvents);
     },
 
     // 添加表单的内容
@@ -122,7 +122,7 @@ const FormView = Backbone.View.extend({
     },
 
     // 提交表单数据
-    submit(callback, onerror) {
+    submit() {
         if (this.validate()) {
             // TODO: 返回原生的 FormData 对象
             const formData = this.getValue();

@@ -17,6 +17,7 @@ const ButtonGroupView = Backbone.View.extend({
         const className = 'btn-primary';
         return $('<button class="btn"></button>')
             .attr('type', options.type)
+            .attr('id', options.id)
             .addClass(className)
             .html(options.text)
     },
