@@ -20,7 +20,7 @@ const FieldView = Backbone.View.extend({
                 'for': name,
                 'role': 'field-label',
             })
-            .addClass(utils.getColumnClass({col: '4,3'}))
+            .addClass(utils.getColumnClass({col: '4'}))
             .html(label)
 
         this.editor = createEditor(options, configs);
@@ -31,7 +31,7 @@ const FieldView = Backbone.View.extend({
             .hide();
 
         const $wrapper = $('<div></div>')
-            .addClass(utils.getColumnClass({col: '8,9'}))
+            .addClass(utils.getColumnClass({col: '8'}))
             .append(this.$editor, this.$output);
 
         this.$el.attr('data-field', name).append(this.$label, $wrapper);
