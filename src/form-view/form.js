@@ -2,6 +2,10 @@
 const utils = require('./utils');
 const FieldView = require('./field');
 
+const formEvents = {
+    'focus [role="field-editor"]': 'handleFocus',
+};
+
 const FormView = Backbone.View.extend({
     schema: [],
 
@@ -10,6 +14,7 @@ const FormView = Backbone.View.extend({
         this.el = this.$el[0];
         this.$form = this._createFormElement();
         this.$el.html(this.$form);
+        this.delegateEvents(formEvents);
     },
 
     // 添加表单的内容
@@ -73,6 +78,12 @@ const FormView = Backbone.View.extend({
     // 获取某表单域的编辑器
     getEditor(name) {
         return _.result(this.fields[name], 'editor');
+    },
+
+    handleFocus(event) {
+        // 表单域 focus 时，去除校验的提示信息
+        this.showValidateTips(false);
+        return this;
     },
 
     // 使表单元素转为普通的输出元素
