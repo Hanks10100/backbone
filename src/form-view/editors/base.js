@@ -1,5 +1,5 @@
 
-const BaseEditor = Framework.View.extend({
+const BaseEditor = Backbone.View.extend({
     tagName: 'input',
     className: 'form-control',
     attributes: {
