@@ -1,6 +1,7 @@
 // var Backbone = require('backbone');
 const utils = require('./utils');
 const FieldView = require('./field');
+const ButtonGroupView = require('./buttons');
 
 const formEvents = {
     'focus [role="field-editor"]': 'handleFocus',
@@ -35,15 +36,18 @@ const FormView = Backbone.View.extend({
     },
 
     createField(key, options = {}, configs = {}) {
-        const field = new FieldView(
-            _.extend({ name: key }, options),
-            configs
-        );
+        _.extend(options, { name: key });
+        if (key === 'buttons') {
+            const buttonGroup = new ButtonGroupView(options, configs);
+            return buttonGroup;
+        } else {
+            const field = new FieldView(options, configs);
 
-        this.fields = this.fields || {};
-        this.fields[key] = field;
+            this.fields = this.fields || {};
+            this.fields[key] = field;
+            return field;
+        }
 
-        return field;
     },
 
     getValue(key) {
