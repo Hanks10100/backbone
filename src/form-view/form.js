@@ -79,6 +79,11 @@ const FormView = Backbone.View.extend({
         return this;
     },
 
+    // 获取某表单域的编辑器
+    getEditor(name) {
+        return _.result(this.fields[name], 'editor');
+    },
+
     // 使表单元素转为普通的输出元素
     freeze() {
         _.each(this.fields, field => field.freeze());
