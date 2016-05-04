@@ -37,6 +37,15 @@ const GroupEditor = BaseEditor.extend({
             .map($input => $input.data('editor-value'))
             .value()
     },
+
+    // 获取选中编辑项的文字
+    getOutputValue: function() {
+        return _.chain(this.fields)
+            .filter($input => $input.is(':checked'))
+            .map($input => '<span>' + $input.data('editor-label') + '</span>')
+            .value()
+            .join('<i class="spliter"></i>')
+    },
 });
 
 module.exports = GroupEditor;

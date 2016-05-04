@@ -15,6 +15,12 @@ const SelectEditor = BaseEditor.extend({
         });
         return this;
     },
+
+    getOutputValue: function() {
+        const value = this.getValue();
+        const res = _.find(this.options, opt => opt.value === value);
+        return res ? res.text : '';
+    },
 });
 
 module.exports = {
