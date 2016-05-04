@@ -1,5 +1,6 @@
+const BaseEditor = require('./base');
 
-const GroupEditor = Framework.View.extend({
+const GroupEditor = BaseEditor.extend({
     tagName: 'div',
     className: 'checks-group',
 });

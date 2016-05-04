@@ -1,5 +1,6 @@
+const BaseEditor = require('./base');
 
-const SelectEditor = Framework.View.extend({
+const SelectEditor = BaseEditor.extend({
     tagName: 'select',
 });
 

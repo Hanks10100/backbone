@@ -1,9 +1,10 @@
+const BaseEditor = require('./base');
 
-const InputEditor = Framework.View.extend({
+const InputEditor = BaseEditor.extend({
     tagName: 'input',
 });
 
-const TextareaEditor = EditorView.extend({
+const TextareaEditor = BaseEditor.extend({
     tagName: 'textarea',
 });
 
