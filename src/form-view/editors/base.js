@@ -19,6 +19,11 @@ const BaseEditor = Backbone.View.extend({
         this.$el.val(value);
         return this;
     },
+
+    // 返回校验结果
+    reportValidity() {
+        return true;
+    },
 });
 
 module.exports = BaseEditor;

@@ -4,6 +4,7 @@ const FieldView = require('./field');
 const ButtonGroupView = require('./buttons');
 
 const formEvents = {
+    'submit form': 'handleSubmit',
     'focus [role="field-editor"]': 'handleFocus',
 };
 
@@ -82,6 +83,13 @@ const FormView = Backbone.View.extend({
     // 获取某表单域的编辑器
     getEditor(name) {
         return _.result(this.fields[name], 'editor');
+    },
+
+    handleSubmit(event) {
+        event.stopPropagation();
+        event.preventDefault();
+        this.submit();
+        return this;
     },
 
     handleFocus(event) {
