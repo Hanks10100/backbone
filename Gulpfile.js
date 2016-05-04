@@ -6,15 +6,18 @@ var webpack         = require('webpack-stream');
 var webpackConfig   = require('./webpack.config.js');
 
 function createTask(srcName, distName) {
+    var config = Object.assign({}, webpackConfig, {
+        output: { filename: distName + '.js' }
+    });
     gulp.task(srcName + ':compile', function() {
-        webpackConfig.output = { filename: distName + '.js' };
         gulp.src('src/' + srcName + '/index.js')
-            .pipe(webpack(webpackConfig))
+            .pipe(webpack(config))
             .pipe(gulp.dest('dist'));
     });
-    gulp.task(srcName + ':release', function() {
+    gulp.task(srcName + ':release', [srcName + ':compile'], function() {
         gulp.src('src/' + srcName + '/index.js')
-            .pipe(webpack(webpackConfig))
+            .pipe(webpack(config))
+            // .pipe(gulp.dest('dist'))
             .pipe(filter('*.js'))
             .pipe(uglify())
             .pipe(rename({ suffix: '.min' }))
