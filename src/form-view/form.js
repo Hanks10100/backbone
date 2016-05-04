@@ -48,6 +48,36 @@ const FormView = Backbone.View.extend({
 
         return field;
     },
+
+    getValue(key) {
+        const fields = this.fields;
+        return _.isUndefined(key)
+            ? _.mapObject(fields, field => field.editor.getValue())
+            : _.has(fields, key)
+                ? fields[key].editor.getValue()
+                : null
+    },
+
+    // 设置表单的值，merge 表示是否采用合并的方式设置值
+    setValue(key, value, merge) {
+        var maps = {};
+        if (_.isString(key)) {
+            maps[key] = value;
+            merge = true;
+        } else if (_.isObject(key)) {
+            maps = key;
+            merge = !!value;
+        }
+
+        _.each(this.fields, (field, key) => {
+            if (!merge || _.has(maps, key)) {
+                field.editor.setValue(maps[key]);
+            }
+        });
+
+        return this;
+    },
+
 });
 
 module.exports = FormView;

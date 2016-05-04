@@ -5,6 +5,15 @@ const BaseEditor = Backbone.View.extend({
     attributes: {
         role: 'field-editor',
     },
+
+    getValue() {
+        return this.$el.val();
+    },
+
+    setValue(value) {
+        this.$el.val(value);
+        return this;
+    },
 });
 
 module.exports = BaseEditor;
